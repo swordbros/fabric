@@ -1,2 +1,2 @@
 # fabric
-swrodbros fabric theme
+swordbros fabric theme
