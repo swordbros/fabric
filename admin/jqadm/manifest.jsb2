@@ -1,0 +1,22 @@
+{
+	"projectName": "fabric",
+	"licenseText": "proprietary",
+	"pkgs": [{
+		"name": "fabric CSS",
+		"file": "fabric.css",
+		"isDebug": true,
+		"fileIncludes": [{
+			"text": "custom.css",
+			"path": "themes/"
+		}]
+	}, {
+		"name": "fabric JS",
+		"file": "fabric.js",
+		"isDebug": true,
+		"fileIncludes": [{
+			"text": "custom.js",
+			"path": "js/"
+		}]
+	}],
+	"resources" : []
+}

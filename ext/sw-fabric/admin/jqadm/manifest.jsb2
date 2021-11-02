@@ -1,0 +1,22 @@
+{
+	"projectName": "sw-fabric",
+	"licenseText": "proprietary",
+	"pkgs": [{
+		"name": "sw-fabric CSS",
+		"file": "sw-fabric.css",
+		"isDebug": true,
+		"fileIncludes": [{
+			"text": "custom.css",
+			"path": "themes/"
+		}]
+	}, {
+		"name": "sw-fabric JS",
+		"file": "sw-fabric.js",
+		"isDebug": true,
+		"fileIncludes": [{
+			"text": "custom.js",
+			"path": "js/"
+		}]
+	}],
+	"resources" : []
+}
