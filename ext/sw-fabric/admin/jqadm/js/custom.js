@@ -1,3 +1,0 @@
-/*
- * Custom sw-fabric JS
- */

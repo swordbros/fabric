@@ -1,0 +1,8 @@
+RewriteEngine On
+RewriteCond %{HTTPS}  !=on
+RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R,L]
+
+### End CyberPanel Generated Rules.
+<IfModule mod_rewrite.c>
+RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>

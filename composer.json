@@ -1,45 +1,75 @@
 {
-	"name": "swordbros/fabric",
-	"description": "Swordbros Aimeos fabric theme",
-	"keywords": ["swordbros", "aimeos", "extension", "theme"],
-	"type": "aimeos-extension",
-	"license": "LGPL-3.0",
-	"prefer-stable": true,
-	"minimum-stability": "dev",
-	"require": {
-		"php": "~7.1||~8.0",
-		"aimeos/aimeos-laravel": "~2021.07"
-	},
-	"autoload": {
-		"psr-4": {
-			"Aimeos\\MW\\": "lib/mwlib/src/MW/",
-			"Aimeos\\MShop\\": "lib/mshoplib/src/MShop/",
-			"Aimeos\\MAdmin\\": "lib/mshoplib/src/MAdmin/",
-			"Aimeos\\Controller\\Common\\": "controller/common/src/Controller/Common/",
-			"Aimeos\\Controller\\Frontend\\": "controller/frontend/src/Controller/Frontend/",
-			"Aimeos\\Controller\\Jobs\\": "controller/jobs/src/Controller/Jobs/",
-			"Aimeos\\Admin\\Jsonadm\\": "admin/jsonadm/src/Admin/Jsonadm/",
-			"Aimeos\\Admin\\JQAdm\\": "admin/jqadm/src/Admin/JQAdm/",
-			"Aimeos\\Client\\Html\\": "client/html/src/Client/Html/",
-			"Aimeos\\Client\\Jsonapi\\": "client/jsonapi/src/Client/Jsonapi/"
-		},
-		"classmap": [
-			"client/html/src",
-			"client/jsonapi/src",
-			"admin/jqadm/src",
-			"admin/jsonadm/src",
-			"controller/common/src",
-			"controller/frontend/src",
-			"controller/jobs/src",
-			"lib/custom/src",
-			"ExtensionServiceProvider.php"
-		]
-	},
+    "name": "aimeos/aimeos",
+    "description": "Aimeos shop system",
+    "keywords": ["Aimeos", "e-commerce", "shop", "laravel", "distribution"],
+    "license": "MIT",
+    "type": "project",
+    "prefer-stable": true,
+    "minimum-stability": "dev",
+    "repositories": [{
+        "type": "composer",
+        "url": "https://packages.aimeos.org/aimeoscom"
+    }],
+    "require": {
+        "php": "^7.3||^8.0",
+        "composer-runtime-api": "^2.1",
+        "laravel/framework": "^8.54",
+        "laravel/sanctum": "^2.11",
+        "laravel/tinker": "^2.5",
+        "laravel/ui": "^3.0",
+        "guzzlehttp/guzzle": "^7.0.1",
+        "fruitcake/laravel-cors": "^2.0",
+        "aimeos/aimeos-laravel": "2021.10.*",
+        "aimeos/ai-cms-grapesjs": "2021.10.*"
+    },
+    "require-dev": {
+        "facade/ignition": "^2.5",
+        "fakerphp/faker": "^1.9.1",
+        "laravel/sail": "^1.0.1",
+        "mockery/mockery": "^1.4.2",
+        "nunomaduro/collision": "^5.0",
+        "phpunit/phpunit": "^9.3.3"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
     "extra": {
         "laravel": {
-            "providers": [
-                "Aimeos\\fabric\\ExtensionServiceProvider"
-            ]
+            "dont-discover": []
         }
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate --ansi",
+            "App\\Composer::configure",
+            "@php artisan migrate",
+            "App\\Composer::setup",
+            "App\\Composer::account",
+            "App\\Composer::success"
+        ],
+        "post-update-cmd": [
+            "@php artisan vendor:publish --tag=public --force"
+        ]
     }
 }
